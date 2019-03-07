@@ -21,6 +21,8 @@ Route::get('/admin', function() {
     return view('admin.index');
 })->middleware('admin');
 
-Route::resource('/admin/pages', 'Admin\PagesController');
+Route::resource('/admin/pages', 'Admin\PagesController', ['except' => ['show']]);
+
+Route::resource('/admin/users', 'Admin\UsersController', ['except' => ['create', 'store', 'show',]]);
 
 Route::get('/home', 'HomeController@index')->name('home');

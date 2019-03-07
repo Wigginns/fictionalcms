@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,39 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
+        return view('admin.users.index')->with('model', User::all());
     }
 
     /**
@@ -58,7 +28,14 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        if(Auth::user()->id == $user->id){
+            return redirect()->route('users.index');
+        }
+
+        return view('admin.users.edit', [
+            'model' => $user,
+            'roles' => Role::all(),
+        ]);
     }
 
     /**
@@ -70,7 +47,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if(Auth::user()->id == $user->id){
+            return redirect()->route('users.index');
+        }
+
+        $user->roles()->sync($request->roles);
+
+        return redirect()->route('users.index');
     }
 
     /**

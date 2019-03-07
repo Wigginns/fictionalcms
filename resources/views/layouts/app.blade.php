@@ -52,7 +52,7 @@
                             </li>
                             @can('manageUsers', App\User::class)
                             <li  class="btn btn-default">
-                                <a href="#">Manage Users</a>
+                                <a href="{{ route('users.index')}}">Manage Users</a>
                             </li>
                             @endcan
                         @endguest
