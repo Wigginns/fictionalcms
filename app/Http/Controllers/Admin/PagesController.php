@@ -22,9 +22,9 @@ class PagesController extends Controller
     public function index()
     {
         if (Auth::user()->isAdminOrEditor()){
-            $pages = Page::all(); 
+            $pages = Page::paginate(5); 
         } else {
-            $pages = Auth::user()->pages()->get();
+            $pages = Auth::user()->pages()->paginate(5);
         }
         return view('admin.pages.index', ['pages' => $pages]);
     }
@@ -49,7 +49,7 @@ class PagesController extends Controller
     {
         Auth::user()->pages()->save(new Page($request->only(['title', 'url','content'])));
 
-        return redirect()->route('pages.index');
+        return redirect()->route('pages.index')->with('status', 'Page created.');
     }
 
     /**
@@ -84,7 +84,7 @@ class PagesController extends Controller
 
         $page->save();
         
-        return redirect()->route('pages.index');
+        return redirect()->route('pages.index')->with('status', 'Page updated.');;
     }
 
     /**
@@ -101,6 +101,6 @@ class PagesController extends Controller
 
         $page->delete();
 
-        return redirect()->route('pages.index');
+        return redirect()->route('pages.index')->with('status', 'Page deleted.');;
     }
 }
