@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/admin', function() {
-    return 'you are an admin or editor';
+    return view('admin.index');
 })->middleware('admin');
 
 Route::resource('/admin/pages', 'Admin\PagesController');

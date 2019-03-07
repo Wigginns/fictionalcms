@@ -33,7 +33,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Pages <span class="caret"></span>
+                                </a>
 
+                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('pages.index') }}">
+                                        Page List
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('pages.create') }}">
+                                        Create New
+                                    </a>
+                                </div>
+                            </li>
+                            @can('manageUsers', App\User::class)
+                            <li  class="btn btn-default">
+                                <a href="#">Manage Users</a>
+                            </li>
+                            @endcan
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
