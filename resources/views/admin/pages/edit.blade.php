@@ -6,7 +6,11 @@
     <form action="{{ route('pages.update', ['page' => $model->id]) }}" method="post">
         {{ method_field('PUT') }}
         @include('admin.pages.partials.fields')
+    </form>
 
+    <form action="{{ route('pages.destroy', ['page' => $model->id]) }}" method="post" class="float-right">
+        {{ method_field('DELETE') }}
+        <button class="btn btn-danger">Delete Post.</button>
     </form>
 </div>
 @endsection
