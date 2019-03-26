@@ -49,6 +49,15 @@
                                         Create New
                                     </a>
                                 </div>
+
+                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('blog.index') }}">
+                                        Blog Posts
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('blog.create') }}">
+                                        Create New
+                                    </a>
+                                </div>
                             </li>
                             @can('manageUsers', App\User::class)
                             <li  class="btn btn-default">
