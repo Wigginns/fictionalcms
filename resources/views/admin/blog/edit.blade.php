@@ -2,15 +2,15 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Page</h1>
-    <form action="{{ route('pages.update', ['page' => $model->id]) }}" method="post">
+    <h1>Edit Blog Post</h1>
+    <form action="{{ route('blog.update', ['blog' => $model->id]) }}" method="post">
         {{ method_field('PUT') }}
-        @include('admin.pages.partials.fields')
+        @include('admin.blog.partials.fields')
     </form>
 
-    <form action="{{ route('pages.destroy', ['page' => $model->id]) }}" method="post" class="float-right">
+    <form action="{{ route('pages.destroy', ['blog' => $model->id]) }}" method="post" class="float-right">
         {{ method_field('DELETE') }}
-        <button class="btn btn-danger">Delete Post.</button>
+        <button class="btn btn-danger">Delete Blog Post</button>
     </form>
 </div>
 @endsection

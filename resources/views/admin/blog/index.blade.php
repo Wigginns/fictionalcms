@@ -17,6 +17,7 @@
                 <th>Author</th>
                 <th>Slug</th>
                 <th>Published</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -24,13 +25,19 @@
             @foreach ($model as $post)
                 <tr>
                     <td>
-                        <a href ="{{ route('blog.edit', ['post' => $post->id])}}">{{$post->title}}</a>
+                        <a href ="{{ route('blog.edit', ['blog' => $post->id])}}">{{$post->title}}</a>
                     </td>
                     <td>
                         {{ $post->user()->first()->name }}
                     </td>
                     <td>{{$post->slug}}</td>
-                    <td></td>
+                    <td>
+                        <form action="{{ route('blog.destroy', ['blog' => $post->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         @endif
@@ -38,4 +45,5 @@
     </table>
     {{$model->links()}}
 </div>
+
 @endsection

@@ -15,6 +15,7 @@
             <tr>
                 <th>Title</th>
                 <th>Link</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -25,6 +26,13 @@
                         <a href ="{{ route('pages.edit', ['page' => $page->id])}}">{{$page->title}}</a>
                     </td>
                     <td>{{$page->url}}</td>
+                    <td>
+                        <form action="{{ route('pages.destroy', ['page' => $page->id]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" data-toggle="confirmation" type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         @endif
@@ -32,4 +40,5 @@
     </table>
     {{$pages->links()}}
 </div>
+
 @endsection
